@@ -21,7 +21,7 @@
 ?>
 
 <?php 
-if(defined('SENTRIFUGO_HOST') && defined('SENTRIFUGO_USERNAME') && defined('SENTRIFUGO_PASSWORD') && defined('SENTRIFUGO_DBNAME') && defined('APPLICATION_NAME') )
+if(defined('SENTRIFUGO_HOST') && defined('SENTRIFUGO_USERNAME') && defined('SENTRIFUGO_PASSWORD') && defined('SENTRIFUGO_DBNAME') && defined('APPLICATION_NAME') && defined('SUPERADMIN_EMAIL') && defined('MAIL_SMTP') && defined('MAIL_USERNAME') && defined('MAIL_PASSWORD') && defined('MAIL_PORT') && defined('MAIL_TLS') && defined('MAIL_AUTH'))
 { ?>
 <form name="frmstep5" id="idfrmstep5" action="../success.php" method="post" class="frm_install">     
     <h3 class="page_title">Final Check</h3>	

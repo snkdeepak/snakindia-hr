@@ -557,7 +557,7 @@ class Default_IndexController extends Zend_Controller_Action
 
 
 		$state_idArr = explode("!@#",$this->_request->getParam('state_id'));
-		$state_id = str_replace("'", '', $state_idArr[0]);
+		$state_id = $state_idArr[0];
 		$con = $this->_request->getParam('con');
 		$state_id = intval($state_id);
 		$citiesform = new Default_Form_cities();

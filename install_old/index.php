@@ -141,7 +141,7 @@ ini_set('max_execution_time',0);
             if(isset($_GET['s']) && $_GET['s'] !='')
 	{
 		$redirectUrl = sapp_Global::_decrypt($_GET['s']); 
-		require_once 'step5'.'.php';
+		require_once 'step'.$redirectUrl.'.php';
 	}	
 	else 
 		require_once 'step1.php';

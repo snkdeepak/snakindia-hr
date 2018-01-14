@@ -230,6 +230,7 @@ class Default_WizardController extends Zend_Controller_Action
         $timezonemodel = new Default_Model_Timezone();
         $wizard_model = new Default_Model_Wizard();
 		$wizardData = $wizard_model->getWizardData();
+	
 		
 		/* START
 		 * Queries to check whether the configuration are already set.
