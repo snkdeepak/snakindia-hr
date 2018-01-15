@@ -498,6 +498,11 @@ class Timemanagement_EmptimesheetsController extends Zend_Controller_Action
 		$calenderWeeksArray = range($firstCalWeek, $lastCalWeek);
 		if($type == 'month'){
 			$calenderWeek = $calenderWeeksArray;
+
+if ($firstCalWeek == '00') {
+$pastYear = $year - 1;
+$calenderWeek[0] = strftime('%U',strtotime( $pastYear.'-12-31'));
+}
 		}
 		if($type == 'week'){
 			$calenderWeek[0] = $calenderWeeksArray[$week-1];
