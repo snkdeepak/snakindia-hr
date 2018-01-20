@@ -1,22 +1,22 @@
 <?php
 /********************************************************************************* 
- *  This file is part of Sentrifugo.
+ *  This file is part of SnakIndia.
  *  Copyright (C) 2015 Sapplica
  *   
- *  Sentrifugo is free software: you can redistribute it and/or modify
+ *  SnakIndia is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  Sentrifugo is distributed in the hope that it will be useful,
+ *  SnakIndia is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with Sentrifugo.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with SnakIndia.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  Sentrifugo Support <support@sentrifugo.com>
+ *  SnakIndia Support <support@sentrifugo.com>
  ********************************************************************************/
 
 /** 
@@ -1006,16 +1006,16 @@ class sapp_Helper
                         $text = "<div style='padding: 0; text-align: left; font-size:14px; font-family:Arial, Helvetica, sans-serif;'>				
                                         <span style='color:#3b3b3b;'>Hello ".ucfirst($userfullname).",</span><br />
 
-                                        <div style='padding:20px 0 0 0;color:#3b3b3b;'>You have been added to ". APPLICATION_NAME.". The login credentials for your Sentrifugo account are:</div>
+                                        <div style='padding:20px 0 0 0;color:#3b3b3b;'>You have been added to ". APPLICATION_NAME.". The login credentials for your SnakIndia account are:</div>
 
                                         <div style='padding:20px 0 0 0;color:#3b3b3b;'>Username: <strong>".$employeeId_final."</strong></div>
                                         <div style='padding:5px 0 0 0;color:#3b3b3b;'>Password: <strong>".$emppassword."</strong></div>
 
-                                        <div style='padding:20px 0 10px 0;'>Please <a href='".BASE_URL."index/popup' target='_blank' style='color:#b3512f;'>click here</a> to login  to your Sentrifugo account.</div>
+                                        <div style='padding:20px 0 10px 0;'>Please <a href='".BASE_URL."index/popup' target='_blank' style='color:#b3512f;'>click here</a> to login  to your SnakIndia account.</div>
 
                                 </div>";
                         $options['subject'] = APPLICATION_NAME.': Login Credentials';
-                        $options['header'] = 'Greetings from Sentrifugo';
+                        $options['header'] = 'Greetings from SnakIndia';
                         $options['toEmail'] = $rowData[5];
                         $options['toName'] = $userfullname;
                         $options['message'] = $text;

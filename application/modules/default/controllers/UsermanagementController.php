@@ -1,22 +1,22 @@
 <?php
 /********************************************************************************* 
- *  This file is part of Sentrifugo.
+ *  This file is part of SnakIndia.
  *  Copyright (C) 2015 Sapplica
  *   
- *  Sentrifugo is free software: you can redistribute it and/or modify
+ *  SnakIndia is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  Sentrifugo is distributed in the hope that it will be useful,
+ *  SnakIndia is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with Sentrifugo.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with SnakIndia.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  Sentrifugo Support <support@sentrifugo.com>
+ *  SnakIndia Support <support@sentrifugo.com>
  ********************************************************************************/
 
 class Default_UsermanagementController extends Zend_Controller_Action
@@ -428,7 +428,7 @@ class Default_UsermanagementController extends Zend_Controller_Action
                    
                     $options['subject'] = APPLICATION_NAME.' login credentials';
                    
-                    $options['header'] = 'Greetings from Sentrifugo';
+                    $options['header'] = 'Greetings from SnakIndia';
                     $options['toEmail'] = $emailaddress;  
                     $options['toName'] = $this->view->emp_name;
                     $options['message'] = $text;
@@ -598,7 +598,7 @@ class Default_UsermanagementController extends Zend_Controller_Action
 										<div></div>	
 										'.$agencyData['userfullname'].' agency has been activated. 
 										<div></div>											
-										<div style="padding:20px 0 10px 0;">Please <a href="'.$baseUrl.'/index/popup" target="_blank" style="color:#b3512f;">click here</a> to login  to your Sentrifugo account.</div>
+										<div style="padding:20px 0 10px 0;">Please <a href="'.$baseUrl.'/index/popup" target="_blank" style="color:#b3512f;">click here</a> to login  to your SnakIndia account.</div>
 										</div>';	
 				$options['cron'] = 'yes';
 				$result = sapp_Global::_sendEmail($options);
@@ -612,7 +612,7 @@ class Default_UsermanagementController extends Zend_Controller_Action
 									<div></div>	
 									Your agency has been activated. For further details, please contact our HR directly.
 									<div></div>	
-									<div style="padding:20px 0 10px 0;">Please <a href="'.$baseUrl.'/index/popup" target="_blank" style="color:#b3512f;">click here</a> to login  to your Sentrifugo account.</div>																			
+									<div style="padding:20px 0 10px 0;">Please <a href="'.$baseUrl.'/index/popup" target="_blank" style="color:#b3512f;">click here</a> to login  to your SnakIndia account.</div>																			
 									</div>';	
 			$options['cron'] = 'yes';
 			$result = sapp_Global::_sendEmail($options);
@@ -638,7 +638,7 @@ class Default_UsermanagementController extends Zend_Controller_Action
 										<div></div>	
 										'.$agencyData['userfullname'].' agency has been deleted. 
 										<div></div>
-										<div style="padding:20px 0 10px 0;">Please <a href="'.$baseUrl.'/index/popup" target="_blank" style="color:#b3512f;">click here</a> to login  to your Sentrifugo account.</div>											
+										<div style="padding:20px 0 10px 0;">Please <a href="'.$baseUrl.'/index/popup" target="_blank" style="color:#b3512f;">click here</a> to login  to your SnakIndia account.</div>											
 										</div>';	
 				$options['cron'] = 'yes';
 				$result = sapp_Global::_sendEmail($options);
