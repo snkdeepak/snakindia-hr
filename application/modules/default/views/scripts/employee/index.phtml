@@ -23,6 +23,13 @@
     <script src="<?php echo EXPENSES_MEDIA_PATH;?>js/materialize.js"></script>
     <link rel="stylesheet" href="<?php echo MEDIA_PATH?>css/screen.css">
     <?php
+    
+    if ($_GET['view'] == 'list') {
+        $_SESSION['emp_view'] = 'list';
+    } else if ($_GET['view'] == 'icon') {
+        $_SESSION['emp_view'] = 'icon';
+    }
+        
 $auth = Zend_Auth::getInstance();
 if($auth->hasIdentity()){
 	$loginUserId = $auth->getStorage()->read()->id;
@@ -48,21 +55,29 @@ if (count($this->messages)) {?>
                 <?php if(!empty($this->popConfigPermission))
     {
 ?>
-                    <div>
-                        <!-- For excel Upload -->
-                        <div class="profile-tabs-right-2">
-                            <div class="flt_right">
-                                <div class="actions_div">
-                                    <?php 
+<div>
+    <!-- For excel Upload -->
+    <div class="profile-tabs-right-2">
+        <div class="flt_right">
+            <div class="actions_div">
+                <?php 
 					  	
 		if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'add') == 'Yes'){?> <a href="<?php echo BASE_URL.'employee/add';?>" class="sprite addrecord">Add</a>
-                                        <?php 	} ?> <span class="uploadbut_exel uploadbutsel flt_left marginfiv" id="upload_custom_div">Import Employees</span> <a target="_blank" href="<?php echo DOMAIN; ?>public/downloads/import_employees.xlsx" class="importformatlink flt_left">Import format</a> <a target="_blank" href="<?php echo DOMAIN; ?>public/downloads/importguide.pdf" class="importformatlink flt_left">Help</a>
-                                            <div id="loaderimgprofile" style="display:none;"><img src="<?php echo DOMAIN; ?>public/media/images/loaderwhite_21X21.gif" style="width:21px; height: 21px; float: none; " /></div>
-                                </div>
-                            </div>
-                            <input type="hidden" id="uploadimagepath" name="uploadimagepath" value="" />
-                            <input type="hidden" name="emp_excel" value="" /> </div>
-                    </div> <span id="error_message"></span>
+                                        <?php 	} ?> 
+                <?php if ($_SESSION['emp_view'] == 'list') { 
+                ?>
+                <span class="uploadbut_exel uploadbutsel flt_left marginfiv" style="width:50px;" style="display: none;" id="list_employees"><a href="<?php echo DOMAIN . 'index.php/employee?view=icon'; ?>">Icon</a></span>
+                <?php } else { 
+                ?>
+                     <span class="uploadbut_exel uploadbutsel flt_left marginfiv" style="width:50px;" style="visibility: hidden" id="list_employees"><a href="<?php echo DOMAIN; ?>index.php/employee?view=list">List</a></span>
+                <?php } ?>
+                <span class="uploadbut_exel uploadbutsel flt_left marginfiv" id="upload_custom_div">Import Employees</span> <a target="_blank" href="<?php echo DOMAIN; ?>public/downloads/import_employees.xlsx" class="importformatlink flt_left">Import format</a> <a target="_blank" href="<?php echo DOMAIN; ?>public/downloads/importguide.pdf" class="importformatlink flt_left">Help</a>
+                    <div id="loaderimgprofile" style="display:none;"><img src="<?php echo DOMAIN; ?>public/media/images/loaderwhite_21X21.gif" style="width:21px; height: 21px; float: none; " /></div>
+            </div>
+        </div>
+        <input type="hidden" id="uploadimagepath" name="uploadimagepath" value="" />
+        <input type="hidden" name="emp_excel" value="" /> </div>
+</div> <span id="error_message"></span>
                     <div id="upload_error" style="display:none;clear:both;"></div>
                     <!-- End excel Upload -->
                     <?php } ?>
@@ -111,13 +126,55 @@ if (count($this->messages)) {?>
                                     <?php 
 										foreach($this->dataArray as $data)
 										{
-										foreach($data as $emp)
-										{ 
-
+										
 
 										?>
 
-                                        <div class="list-item">
+                                                                        <?php if ($_SESSION['emp_view'] == 'list') { ?>
+                                                                                 
+                                                 <div class="details_data_display_block newtablegrid" id="reportgrid">
+		<table class='grid' align='center'  width='100%' cellspacing='0' cellpadding='4' border='0'>
+		    <thead>
+		        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Department</th>
+                            <th>Email Address</th>
+                            <th>Contact Number</th>
+                            <th>Action</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		  <?php foreach($data as $emp) { ?> 
+                        <tr>
+                            <td><?php echo $emp['userfullname']; ?></td>
+                            <td><?php echo $emp['emprole_name']; ?></td>
+                            <td><?php echo $emp['department_name']; ?></td>
+                            <td><?php echo $emp['emailaddress']; ?></td>
+                            <td><?php echo $emp['contactnumber']; ?></td>
+                            <td>
+                                <?php if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'edit') == 'Yes'){?>
+                                    <a href="<?php echo BASE_URL.'employee/edit/id/'.$emp['id']; ?>">
+                                        <i class="fa fa-edit"></i> Edit</a>
+                                    
+                            <?php }
+                            
+                            if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'view') == 'Yes'){?>
+                                    <a href="<?php echo BASE_URL.'employee/view/id/'.$emp['id']; ?>">
+                                        <i class="fa fa-view"></i> View</a>
+                                    
+                            <?php }?>
+                            </td>
+                        </tr>
+                  <?php } ?>
+		</table>
+	</div>
+                                                 
+                                                 
+                                                 
+                                            <?php } else { 
+                                            foreach($data as $emp) { ?>
+                                                <div class="list-item">
                                             <div class="li-head">
                                                 <div class="li-avatar"> <img src="<?php echo $baseUrl; ?>/public/uploads/profile/<?php echo $emp['profileimg'];?>" onerror="this.src='<?php echo MEDIA_PATH; ?>images/profile_pic.png'" width="54" height="54" /> </div>
                                                 <div class="li-emp-details"> <span class="emp-name"><?php echo $emp['userfullname']; ?></span> <span class="emp-designation"><?php echo $emp['emprole_name']; ?></span> <span class="emp-department"><?php echo $emp['department_name'];?></span> </div>
@@ -146,9 +203,11 @@ if (count($this->messages)) {?>
                                                 </ul>
                                             </div>
 											</a>
-                                        </div>
+                                             </div>
+                                                                                <?php }} ?>
+                                       
                                         <?php
-} } }
+ } }
 else
 {
 	echo "<p class='no-data'>No Data Found</p>";
@@ -219,10 +278,12 @@ if($this->call != "ajaxcall")
                                                 }
                                             }
                                         }, 'json');
+                                        
+                                       
                                     </script>
                                     <?php 
 }
-}
+}   
 ?>
                                         <style>
                                             .search_emp {

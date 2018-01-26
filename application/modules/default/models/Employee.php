@@ -123,6 +123,15 @@ class Default_Model_Employee extends Zend_Db_Table_Abstract
 		
 		return $usersResult;
 	}
+        
+        public function deleteEmployee($id)
+	{	
+		$db         = Zend_Db_Table::getDefaultAdapter();
+                echo "DELETE * FROM main_employee WHERE id = " . $id;die;
+		$deleteData = $db->query("DELETE * FROM main_employee WHERE id = " . $id);
+		return $deleteData;
+	}
+        
 	/**
          * This function gives full employee details based on user id.
          * @param integer $id  = id of employee

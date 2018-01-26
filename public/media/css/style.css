@@ -4660,3 +4660,16 @@ border-radius: 16px; cursor:pointer; color:#FFF; font-family: 'Roboto Regular'; 
 .text-right {text-align: right; margin-bottom: 10px;}
 
 .full-width {float:left; width: 100%;}
+
+.red_button {
+    background-color: #f44336; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+        padding: 10px 12px;
+}

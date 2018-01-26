@@ -143,7 +143,9 @@ class Zend_View_Helper_Employeedetails extends Zend_View_Helper_Abstract {
 									<p class="field switch"><label class="cb-enable  '.$sel_act.'"><span>Active</span></label><label class="cb-disable '.$sel_dact.'"><span>Inactive</span></label> </p>';
 							}else
 							{
-								$empdata .= '<p class="field switch"><label class="cb-enable  '.$sel_act.'"><span>Active</span></label><label class="cb-disable '.$sel_dact.'"><span>Inactive</span></label> </p>';
+								$empdata .= '<p class="field switch"><label class="cb-enable  '.$sel_act.'"><span>Active</span></label>'
+                                                                        . '<label class="cb-disable '.$sel_dact.'"><span>Inactive</span></label>'
+                                                                        . '<label class="cb-delete'.$sel_dact.'"><span class="red_button">Delete</span></label></p>';
 							}	
 										
 						if($sel_act == "selected")
@@ -152,6 +154,10 @@ class Zend_View_Helper_Employeedetails extends Zend_View_Helper_Abstract {
 										<script type='text/javascript' language='javascript'>
 											$('.cb-disable').click(function(){              
 												makeActiveInactive('inactive','".$emparr['id']."');
+											});
+                                                                                        
+                                                                                        $('.cb-delete').click(function(){              
+                                                                                            makeActiveInactive('delete','".$emparr['id']."', '" . $emparr['userfullname'] . "');
 											});
 										</script> ";
 						}

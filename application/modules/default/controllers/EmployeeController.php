@@ -110,74 +110,70 @@ class Default_EmployeeController extends Zend_Controller_Action
 	//function for view more employees
 	public function getmoreemployeesAction()
 	{
-			$auth = Zend_Auth::getInstance();
-			if($auth->hasIdentity()){
-				$loginUserId = $auth->getStorage()->read()->id;
-				$loginuserRole = $auth->getStorage()->read()->emprole;
-				$loginuserGroup = $auth->getStorage()->read()->group_id;
-			}
-			$call = $this->_getParam('call');
-			$popConfigPermission = array();
-			$data = array();
-			$limit=$this->_getParam('limit');
-			$offset=$this->_getParam('offset');
-			$count_remaining=$this->_getParam('count_remaining');
-			$flag=$this->_getParam('flag');
-			
-			$search_val = $this->_request->getParam('search_val',null);
-			$search_str = $this->_request->getParam('search_str',null);
-			$role_id = $this->_request->getParam('role_id',null);
-			$empflag = $this->_request->getParam('empflag',null);
-			$clearflag = $this->_request->getParam('clearflag',null);
-			
-			if($call == 'ajaxcall')
-				$this->_helper->layout->disableLayout();
-		                
-		                if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'add') == 'Yes'){
-					array_push($popConfigPermission,'employee');
-				}
-		    $this->view->popConfigPermission = $popConfigPermission;
-				
-			$employeeModel = new Default_Model_Employee();
-			if(	$empflag == 'myemployees')
-			{
-				$dataTmp = $employeeModel->getEmployees($loginUserId,$loginUserId,$limit,$offset,$search_val,$search_str,$role_id); 
-				$totalemployees= $employeeModel->getEmployees($loginUserId,$loginUserId,'','',$search_val,$search_str,$role_id); 
-				$totalcount=count($totalemployees);
-				$empcount=count($dataTmp);
-			}
-			else{
+            $auth = Zend_Auth::getInstance();
+            if($auth->hasIdentity()){
+                    $loginUserId = $auth->getStorage()->read()->id;
+                    $loginuserRole = $auth->getStorage()->read()->emprole;
+                    $loginuserGroup = $auth->getStorage()->read()->group_id;
+            }
+        
+            $call = $this->_getParam('call');
+            $popConfigPermission = array();
+            $data = array();
+            $limit=$this->_getParam('limit');
+            $offset=$this->_getParam('offset');
+            $count_remaining=$this->_getParam('count_remaining');
+            $flag=$this->_getParam('flag');
 
-				$dataTmp = $employeeModel->getEmployees('',$loginUserId,$limit,$offset,$search_val,$search_str,$role_id); 
-             	$totalemployees= $employeeModel->getEmployees('',$loginUserId,'','',$search_val,$search_str,$role_id); 
-				$totalcount=count($totalemployees);
-				$empcount=count($dataTmp);
-			}
-			
-			   if($search_val != '' && isset($search_val) && $flag == 0)
-			   {
-					$this->view->remainingcount = $totalcount -  $empcount;  
-			   }
-			   else
-			   {
-				   $this->view->remainingcount = $count_remaining -  $empcount;
-			   }
-				 if($clearflag == 1)
-				{
-					$this->view->remainingcount = $totalcount -  $empcount;  
-				}
-			
-				array_push($data,$dataTmp);
-				$this->view->call = $call;
-				$this->view->dataArray = $data;
-				$this->view->empcount = $empcount;
-				$this->view->totalcount = $totalcount;
-				$this->view->limit = $limit;
-				$this->view->empflag = $empflag;
-				$this->view->inc_offset = $offset + $limit;
-			
+            $search_val = $this->_request->getParam('search_val',null);
+            $search_str = $this->_request->getParam('search_str',null);
+            $role_id = $this->_request->getParam('role_id',null);
+            $empflag = $this->_request->getParam('empflag',null);
+            $clearflag = $this->_request->getParam('clearflag',null);
+
+            if($call == 'ajaxcall')
+                $this->_helper->layout->disableLayout();
+
+            if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'add') == 'Yes'){
+                    array_push($popConfigPermission,'employee');
+            }
+            $this->view->popConfigPermission = $popConfigPermission;
+
+            $employeeModel = new Default_Model_Employee();
+            if(	$empflag == 'myemployees') {
+                    $dataTmp = $employeeModel->getEmployees($loginUserId,$loginUserId,$limit,$offset,$search_val,$search_str,$role_id); 
+                    $totalemployees= $employeeModel->getEmployees($loginUserId,$loginUserId,'','',$search_val,$search_str,$role_id); 
+                    $totalcount=count($totalemployees);
+                    $empcount=count($dataTmp);
+            } else {
+
+                $dataTmp = $employeeModel->getEmployees('',$loginUserId,$limit,$offset,$search_val,$search_str,$role_id); 
+                $totalemployees= $employeeModel->getEmployees('',$loginUserId,'','',$search_val,$search_str,$role_id); 
+                $totalcount=count($totalemployees);
+                $empcount=count($dataTmp);
+            }
+
+            if($search_val != '' && isset($search_val) && $flag == 0) {
+                $this->view->remainingcount = $totalcount -  $empcount;  
+            } else {
+                $this->view->remainingcount = $count_remaining -  $empcount;
+            }
+            
+            if($clearflag == 1) {
+                $this->view->remainingcount = $totalcount -  $empcount;  
+            }
+
+            array_push($data,$dataTmp);
+            $this->view->call = $call;
+            $this->view->dataArray = $data;
+            $this->view->empcount = $empcount;
+            $this->view->totalcount = $totalcount;
+            $this->view->limit = $limit;
+            $this->view->empflag = $empflag;
+            $this->view->inc_offset = $offset + $limit;
 	}
-	public function addorganisationhead($loginUserId)
+
+        public function addorganisationhead($loginUserId)
 	{
 			$user_model = new Default_Model_Usermanagement();
 			$role_model = new Default_Model_Roles();
@@ -2423,6 +2419,20 @@ public function editappraisal($id,$performanceflag,$ff_flag)
 											'recordid' =>$emp_id,
 					 			'date' => gmdate("Y-m-d H:i:s"),
                                              'isactive' => 0
+					);
+					$jsonlogarr = json_encode($logarr);
+					
+				}else if($status == 'delete')
+				{
+					$data = array(
+						'isactive' => 5,
+						'emptemplock' => 0,
+					);
+					$empdata = array('isactive' => 5);
+					$logarr = array('userid' => $loginUserId,
+											'recordid' =>$emp_id,
+					 			'date' => gmdate("Y-m-d H:i:s"),
+                                             'isactive' => 5
 					);
 					$jsonlogarr = json_encode($logarr);
 					

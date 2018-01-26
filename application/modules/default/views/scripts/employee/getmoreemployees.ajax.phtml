@@ -24,6 +24,47 @@ foreach($this->dataArray as $data)
 {
 foreach($data as $emp)
 { 
+    if ($_SESSION['emp_view'] == 'list') { ?>
+                                                              
+                                                 <div class="details_data_display_block newtablegrid" id="reportgrid">
+		<table class='grid' align='center'  width='100%' cellspacing='0' cellpadding='4' border='0'>
+		    <thead>
+		        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Department</th>
+                            <th>Email Address</th>
+                            <th>Contact Number</th>
+                            <th>Action</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		  <?php foreach($data as $emp) { ?> 
+                        <tr>
+                            <td><a href="<?php echo BASE_URL.'employee/view/id/'.$emp['id']; ?>"><?php echo $emp['userfullname']; ?></a></td>
+                            <td><?php echo $emp['emprole_name']; ?></td>
+                            <td><?php echo $emp['department_name']; ?></td>
+                            <td><?php echo $emp['emailaddress']; ?></td>
+                            <td><?php echo $emp['contactnumber']; ?></td>
+                            <td>
+                                <?php if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'edit') == 'Yes'){?>
+                                    <a href="<?php echo BASE_URL.'employee/edit/id/'.$emp['id']; ?>">
+                                        <i class="fa fa-edit"></i> Edit</a>
+                                    
+                            <?php }
+                            
+                            if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'view') == 'Yes'){?>
+                                    <a href="<?php echo BASE_URL.'employee/view/id/'.$emp['id']; ?>">
+                                        <i class="fa fa-view"></i> View</a>
+                                    
+                            <?php }?>
+                            </td>
+                        </tr>
+                  <?php } ?>
+		</table>
+	</div>
+                               
+    <?php } else {
 ?>
         <div class="list-item">
             <div class="li-head">
@@ -58,7 +99,11 @@ foreach($data as $emp)
         </div>
 	
 	<?php
- } }}
+}} 
+ 
+}
+
+}
  else
 {
 	echo '<p class="no-data">No Data Found</p>';

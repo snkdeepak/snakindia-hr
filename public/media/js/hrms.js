@@ -4396,7 +4396,7 @@ function makeActiveInactive_1(status,emp_id)
 	}
 }
 
-function makeActiveInactive(status,emp_id)
+function makeActiveInactive(status,emp_id, emp_name)
 {
     if(status == 'other')
 	{
@@ -4411,9 +4411,22 @@ function makeActiveInactive(status,emp_id)
 	}
 	else
 	{
-			if(status == 'inactive')
+			if(status == 'inactive') {
 				var mstatus = 'inactivate this employee';
-			else
+                            } else if (status == 'delete') {
+                                 jConfirm("Are you sure you want to delete "+emp_name+'?', 'Confirmation', function(r) {
+                            if(r == true) {
+                                $.post(base_url+"/default/employee/makeactiveinactive",{emp_id:emp_id,status:status,},function(data){
+                                    data = JSON.parse(data);
+                                    if(data.result == 'yes') {
+                                        console.log('Inside');
+                                        window.location.href = base_url + '/employee';
+                                    }
+                                });
+                            }
+        })
+                            }
+			else {
 				mstatus = 'activate this employee';
 				jConfirm("Are you sure you want to "+mstatus+'?', 'Confirmation', function(r) {
 				if(r==true)
@@ -4461,6 +4474,7 @@ function makeActiveInactive(status,emp_id)
 					}
 				}
 			});
+                    }
 	}
 }
 
