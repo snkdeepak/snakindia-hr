@@ -1109,7 +1109,7 @@ class Timemanagement_IndexController extends Zend_Controller_Action
 	}
 
 	public function submitAction() {
-
+            
 		$storage = new Zend_Auth_Storage_Session();
 		$sessionData = $storage->read();
 		$myTsModel = new Timemanagement_Model_MyTimesheet();
@@ -1181,10 +1181,23 @@ class Timemanagement_IndexController extends Zend_Controller_Action
 		$this->_helper->layout->disableLayout();
 
 		$this->view->status = 'success';
-		if($selDay != '')
-		$this->view->message = 'Timesheet submited successfully for Day '.$selDay;
-		else
-		$this->view->message = 'Timesheet submited successfully for week '.$week;
+                
+		if($selDay != '') {
+                    $subject = 'Daily timessheet is updated by ' . '';
+                    $this->view->message = 'Timesheet submited successfully for Day '.$selDay;
+                } else {
+                    $mail_to = SNAK_HR_EMAIL;
+                    $subject = 'Weekly timessheet updated by ' . $sessionData->userfullname;
+                    $message = 'Dear, <br/>Weekly timessheet is updated by ' . $sessionData->userfullname . ' for week ' . $week . '.';
+                    $this->view->message = 'Timesheet submited successfully for week '.$week;
+                    
+                    $options['header'] = 'Time Sheet Update';
+                    $options['toEmail'] = $mail_to;
+                    $options['fromName'] = 'SnakIndia Timesheet Info';
+                    $options['subject'] = $subject;
+                    $options['message'] = $message;
+                    sapp_Global::_sendEmail($options);
+                }
 	}
 	/**
 	 * this action is used to get states based on country id.

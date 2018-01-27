@@ -577,7 +577,7 @@ border-radius: 4px;
 .enter_time_week .week_status_tr td.total_week_hrs{ background:#1bce7c; color:#FFFFFF;  font-size:24px;}
 .weekly_note_row{ background:none !important;}
 .weekly_note_row td{ text-align:left !important;}
-.weekly_note_row td textarea{ border:1px solid #d1d1d1; width:98%; resize:none; padding:10px; font-family: "Roboto Regular"; font-size:14px; color:#4b4b4b; height:33px; overflow:auto; background:#fcfcfc;}
+.weekly_note_row td textarea{ border:1px solid #d1d1d1; width:98%; resize:none; padding:10px; font-family: "Roboto Regular"; font-size:14px; color:#4b4b4b; height:100px; overflow:auto; background:#fcfcfc;}
 .weekly_note{ background:transparent none repeat scroll 0 0; position:relative; width:80%; min-height:100px; border-top:1px solid #FFFFFF; padding:10px 20px 10px 0;}
 .weekly_note_txt{ background:#f6f6fa; position:relative; width:95%; min-height:50px; border:1px solid #e5e5e5; padding:10px 20px; margin-top:5px; color:#333;}
 .weekly_note label{ line-height:24px;}

@@ -1526,7 +1526,8 @@
 	        <td class="project_name_txt"><?php echo $weekData['task'];?></td>
 	        <td id="td_sun_<?php echo $weekData['project_task_id']; ?>" class="<?php echo $weekendSunClass; ?> <?php echo $sunDisClass; ?>">
 	       		<input	       		
-	       		 <?php 	       			       		 
+	       		 <?php 	       	
+//                         echo $sunDisClass .'>>>>>>>>>'.$sunEntryFlag. '.........'.$sunFreezedClass;die;
 	       		 if($sunDate <= $today  && $sunDisClass == '' && !$sunEntryFlag && $sunFreezedClass == ''){
 					if($projectStatus=='hold' || $projectStatus=='completed')
 					{ 
@@ -1535,7 +1536,7 @@
 				<?php	} else {
 				 ?> 
 	       		 onfocus="activeDay('sun')"
-				 <?php } }else {?>
+				 <?php } }else if ($sunEntryFlag) {?>
 		       		disabled="disabled"
 		       		<?php }?> 
 		          type="text" class="time_enter_field <?php echo ($sunEntryFlag)?"time_enter_field_view":"";?>"  id="input_sun_<?php echo $weekData['project_task_id'];?>"
@@ -1550,7 +1551,7 @@
 				 disabled="disabled"
 				<?php } else {?>
 	      	    onfocus="activeDay('mon')"
-		      	<?php } }else {?>
+		      	<?php } }else if($monEntryFlag) {?>
 		       disabled="disabled"
 		       	<?php }?> 
         	     type="text" class="time_enter_field <?php echo ($monEntryFlag)?"time_enter_field_view":"";?>"  id="input_mon_<?php echo $weekData['project_task_id'];?>" 
@@ -1565,7 +1566,7 @@
 				 disabled="disabled"
 					<?php } else {?>
 	       		onfocus="activeDay('tue')"
-				 <?php } }else {?>
+				 <?php } }else if($tueEntryFlag){?>
 		       		disabled="disabled"
 		       		<?php }?>  	 
 	       		type="text" class="time_enter_field <?php echo ($tueEntryFlag)?"time_enter_field_view":"";?>"  id="input_tue_<?php echo $weekData['project_task_id'];?>"
@@ -1580,7 +1581,7 @@
 					 disabled="disabled"
 					 <?php } else {?>
 	        	 onfocus="activeDay('wed')"
-		       	 <?php } }else {?>
+		       	 <?php } }else if ($wedEntryFlag){?>
 		       		disabled="disabled"
 		       		<?php }?>  
 	        	 type="text" class="time_enter_field <?php echo ($wedEntryFlag)?"time_enter_field_view":"";?>"  id="input_wed_<?php echo $weekData['project_task_id'];?>" 
@@ -1595,7 +1596,7 @@
 				disabled="disabled"				 
 				 <?php } else {?>
 	       		 onfocus="activeDay('thu')"
-		       	 <?php } }else {?>
+		       	 <?php } }else if($thuEntryFlag){?>
 		       		disabled="disabled"
 		       		<?php }?>  
 		         type="text" class="time_enter_field <?php echo ($thuEntryFlag)?"time_enter_field_view":"";?>"  id="input_thu_<?php echo $weekData['project_task_id'];?>" 
@@ -1610,7 +1611,7 @@
 				disabled="disabled"
 					 <?php } else {?>
 	       		 onfocus="activeDay('fri')" 
-	       		 <?php } }else {?>
+	       		 <?php } }else if($friEntryFlag){?>
 		       		disabled="disabled"
 		       		<?php }?>  
 	       		 type="text" class="time_enter_field <?php echo ($friEntryFlag)?"time_enter_field_view":"";?>"  id="input_fri_<?php echo $weekData['project_task_id'];?>" 
@@ -1625,7 +1626,7 @@
 				 disabled="disabled"
 				 <?php } else {?>
 	        	onfocus="activeDay('sat')"
-				 <?php } } else {?>
+				 <?php } } elseif($satEntryFlag) {?>
 		       		disabled="disabled"
 		       		<?php }?>  
 		         type="text" class="time_enter_field <?php echo ($satEntryFlag)?"time_enter_field_view":"";?>"  id="input_sat_<?php echo $weekData['project_task_id'];?>"
@@ -1873,7 +1874,7 @@
       </tr>
 	  <tr class="weekly_note_row">
 	  <td colspan="5"><div class="weekly_note"><label>Weekly Note</label>
-	  <textarea id="week_note_text" maxlength="100" cols="" rows="" placeholder="Enter note"><?php echo (sizeof($weekNotesData) > 0)? $weekNotes['week_note']:""; ?></textarea>
+	  <textarea id="week_note_text"  cols="" rows="" placeholder="Enter note"><?php echo (sizeof($weekNotesData) > 0)? $weekNotes['week_note']:""; ?></textarea>
 	  <!-- <textarea cols="" rows="">Enter note</textarea>-->
 	  </div></td>	   
 
@@ -1902,27 +1903,31 @@
 		$dayStatus = (sizeof($weekDaysStatus) != 0)?$weekDaysStatus[0][$day.'_status']:"No Entry"; 		
 		if($dayStatus == 'No Entry' || $dayStatus == 'Yet to submit' || $dayStatus == 'Rejected' || $dayStatus == 'Enabled') {
 			
-			if($day == 'sun') {
-				if($sunFreezedClass == '' && $sunDisClass == '') $timeEntryCheck ++;	
-			}
-			if($day == 'mon') {
-				if($monFreezedClass == '' && $monDisClass == '')  $timeEntryCheck ++;
-			}
-			if($day == 'tue') {
-				if($tueFreezedClass == '' && $tueDisClass == '')  $timeEntryCheck ++;	
-			}
-			if($day == 'wed') {
-				if($wedFreezedClass == ''  && $wedDisClass == '')  $timeEntryCheck ++;	
-			}
-			if($day == 'thu') {
-				if($thuFreezedClass == '' && $thuDisClass == '') $timeEntryCheck ++;	
-			}
-			if($day == 'fri') {
-				if($friFreezedClass == '' && $friDisClass == '')  $timeEntryCheck ++;
-			}	
-			if($day == 'sat') {
-				if($satFreezedClass == '' && $satDisClass == '')  $timeEntryCheck ++;
-			}	
+                    if (empty($sunEntryFlag) || empty($tueEntryFlag) || empty($wedEntryFlag) || empty($thuEntryFlag) || empty($friEntryFlag)
+                             || empty($satEntryFlag) || empty($monEntryFlag)) {
+                             $timeEntryCheck++;
+                    }
+//			if($day == 'sun') {
+//				if(!$sunEntryFlag == '' && $sunDisClass == '' ) $timeEntryCheck ++;	
+//			}
+//			if($day == 'mon') {
+//				if($monFreezedClass == '' && $monDisClass == '')  $timeEntryCheck ++;
+//			}
+//			if($day == 'tue') {
+//				if($tueFreezedClass == '' && $tueDisClass == '')  $timeEntryCheck ++;	
+//			}
+//			if($day == 'wed') {
+//				if($wedFreezedClass == ''  && $wedDisClass == '')  $timeEntryCheck ++;	
+//			}
+//			if($day == 'thu') {
+//				if($thuFreezedClass == '' && $thuDisClass == '') $timeEntryCheck ++;	
+//			}
+//			if($day == 'fri') {
+//				if($friFreezedClass == '' && $friDisClass == '')  $timeEntryCheck ++;
+//			}	
+//			if($day == 'sat') {
+//				if($satFreezedClass == '' && $satDisClass == '')  $timeEntryCheck ++;
+//			}	
 		}		
 	}	
 	

@@ -155,13 +155,13 @@ if (count($this->messages)) {?>
                             <td>
                                 <?php if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'edit') == 'Yes'){?>
                                     <a href="<?php echo BASE_URL.'employee/edit/id/'.$emp['id']; ?>">
-                                        <i class="fa fa-edit"></i> Edit</a>
+                                        <i class="fa fa-edit"></i></a>
                                     
                             <?php }
                             
                             if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'view') == 'Yes'){?>
                                     <a href="<?php echo BASE_URL.'employee/view/id/'.$emp['id']; ?>">
-                                        <i class="fa fa-view"></i> View</a>
+                                        <i class="sprite view"></i></a>
                                     
                             <?php }?>
                             </td>
