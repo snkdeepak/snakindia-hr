@@ -163,6 +163,13 @@ if (count($this->messages)) {?>
                                     <a href="<?php echo BASE_URL.'employee/view/id/'.$emp['id']; ?>">
                                         <i class="sprite view"></i></a>
                                     
+                            <?php }
+                            
+                            if(sapp_Global::_checkprivileges(EMPLOYEE,$loginuserGroup,$loginuserRole,'delete') == 'Yes'){
+                                $emp_name = "'" . $emp['userfullname'] . "'";
+                                ?>
+                                <a href="#" onclick="makeActiveInactive('delete',<?php echo $emp['id']; ?>,<?php echo $emp_name; ?>)"><i class="cb-delete sprite delete"></i></a>
+                                    
                             <?php }?>
                             </td>
                         </tr>
@@ -310,3 +317,4 @@ if($this->call != "ajaxcall")
                                             }
                                         </style>
 										
+                                     
