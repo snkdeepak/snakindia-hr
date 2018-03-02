@@ -120,14 +120,23 @@ class Default_Form_empsalarydetails extends Zend_Form
                            )
         	));
 
-        
+                $ifsccode = new Zend_Form_Element_Text('ifsccode');
+		$ifsccode->setAttrib('maxlength',20);
+		$ifsccode->setLabel('IFSC Code');
+		$ifsccode->addFilters(array('StringTrim'));
+		$ifsccode->addValidator("regex",true,array(
+                            'pattern'=>'/^[a-zA-Z0-9 ]*$/', 
+                           
+                           'messages'=>array(
+                               'regexNotMatch'=>'Please enter only alphanumeric IFSC code.'
+                           )
+        	));
     	
-				
 		$submit = new Zend_Form_Element_Submit('submit');
 		$submit->setAttrib('id', 'submitbutton');
 		$submit->setLabel('Save');
 		
-		$this->addElements(array($id,$userid,$currencyid,$salarytype,$salary,$bankname,$accountholder_name,$accountholding,$accountclasstypeid,$bankaccountid,$accountnumber,$submit));
+		$this->addElements(array($id,$userid,$currencyid,$salarytype,$salary,$bankname,$accountholder_name,$accountholding,$accountclasstypeid,$bankaccountid,$accountnumber,$ifsccode,$submit));
         $this->setElementDecorators(array('ViewHelper')); 
  		 $this->setElementDecorators(array(
                     'UiWidgetElement',

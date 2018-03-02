@@ -153,7 +153,7 @@ class Zend_View_Helper_Employeedetails extends Zend_View_Helper_Abstract {
 							$empdata .= "
 										<script type='text/javascript' language='javascript'>
 											$('.cb-disable').click(function(){              
-												makeActiveInactive('inactive','".$emparr['id']."');
+												makeActiveInactive('inactive','".$emparr['id']."', '" . $emparr['userfullname'] . "');
 											});
                                                                                         
                                                                                         $('.cb-delete').click(function(){              

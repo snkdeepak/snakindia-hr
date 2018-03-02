@@ -4411,10 +4411,14 @@ function makeActiveInactive(status,emp_id, emp_name)
 	}
 	else
 	{
-			if(status == 'inactive') {
-				var mstatus = 'inactivate this employee';
-                            } else if (status == 'delete') {
-                                 jConfirm("Are you sure you want to delete "+emp_name+'?', 'Confirmation', function(r) {
+			if(status == 'inactive' || status == 'delete') {
+                            var mstatus = 'inactivate this employee';
+                            if (status == 'delete') {
+                                var mstatus = 'delete this employee';
+                            }
+				
+                           
+                                 jConfirm("Are you sure you want to "+ status + " " + emp_name+'?', 'Confirmation', function(r) {
                             if(r == true) {
                                 $.post(base_url+"/default/employee/makeactiveinactive",{emp_id:emp_id,status:status,},function(data){
                                     data = JSON.parse(data);

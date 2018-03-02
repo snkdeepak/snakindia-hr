@@ -669,7 +669,15 @@ class Default_Model_Users extends Zend_Db_Table_Abstract
 		}	
 	
 	
-	
+	public function getActiveUsers()
+	{
+		$db = Zend_Db_Table::getDefaultAdapter();
+		
+		$usersData = $db->query("select userfullname, emailaddress from main_users WHERE isactive=1");
+
+		$usersResult = $usersData->fetchAll();
+		return $usersResult;
+	}
 	
 	
 }

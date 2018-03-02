@@ -57,7 +57,8 @@ sapp_Helper::viewBody('alt',$this->form->currencyid->getLabel(),(!empty($this->d
 sapp_Helper::viewBody('nor',$this->form->salary->getLabel(),(!empty($this->data[0]['salary']))?$this->data[0]['salary']:"...",$this->form->bankname->getLabel(),(!empty($this->data[0]['bankname']))?$this->data[0]['bankname']:"...");
 sapp_Helper::viewBody('alt',$this->form->accountholder_name->getLabel(),(!empty($this->data[0]['accountholder_name']))?$this->data[0]['accountholder_name']:"...",$this->form->accountholding->getLabel(),(!empty($account_holding))?$this->form->accountholding->getValue():"...");
 sapp_Helper::viewBody('nor',$this->form->accountclasstypeid->getLabel(),(!empty($this->data[0]['accountclasstypeid']))?$this->data[0]['accountclasstypeid']:"...",$this->form->bankaccountid->getLabel(),(!empty($this->data[0]['bankaccountid']))?$this->data[0]['bankaccountid']:"...");
-sapp_Helper::viewBody('alt',$this->form->accountnumber->getLabel(),(!empty($this->data[0]['accountnumber']))?$this->data[0]['accountnumber']:"...",'','');
+sapp_Helper::viewBody('alt',$this->form->accountnumber->getLabel(),(!empty($this->data[0]['accountnumber']))?$this->data[0]['accountnumber']:"...",$this->form->ifsccode->getLabel(),(!empty($this->data[0]['ifsccode']))?$this->data[0]['ifsccode']:"...");
+
 sapp_Helper::viewFooter();
 ?>
 	<?php }?>		

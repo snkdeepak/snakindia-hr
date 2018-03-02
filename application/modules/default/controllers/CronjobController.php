@@ -705,5 +705,40 @@ class Default_CronjobController extends Zend_Controller_Action
          	
       	
 	}
+        
+        public function tasksheetpendingnotificationAction()
+        {
+             $user_model = new Default_Model_Users();
+             $user_list = $user_model->getActiveUsers();
+             $message = ",<br/><br/>
+                Greetings of the day!!!<br/>
+                This is the reminder that please submit the Time-Sheet on daily basis.<br/>
+                NOTE: Ignore if you are submitting the Time-sheet on daily basis.<br/>
+                Have a great week ahead.<br/>";
+             
+             if (is_array($user_list) && count($user_list) > 0) {
+                 foreach ($user_list as $user) {
+                    $options = array();
+//                    $options['header'] = $mdata['header'];
+                    $name = ucwords($user['userfullname']);
+                    $options['message'] = 'Hi ' . $name . $message;
+                    $options['subject'] = 'Time Sheet Reminder';
+                    $options['toEmail'] = $user['emailaddress'];
+                    $options['toName'] = $name;
+                   
+                    // to send email
+                    $mail_status = sapp_Mail::_email($options);
+                    if (empty($mail_status)) {
+                        $name = ucwords($user['userfullname']);
+                        $mail_options['message'] = 'Unable to send mail to ' . $name;
+                        $mail_options['subject'] = 'Unable to send mail to ' . $name;
+                        $mail_options['toEmail'] = 'info@snakindia.com';
+                        $mail_options['toName'] = 'Admin';
+                        
+                        $mail_status = sapp_Mail::_email($mail_options);
+                    }
+                 }
+             }
+        }
 }
 

@@ -167,6 +167,14 @@
 				   <span class="errors" id="errors-<?php echo $this->form->accountnumber->getId(); ?>"><?php echo $this->msgarray['accountnumber'];?></span>
 				<?php }?>
 				</div>
+                            
+                            <div class="new-form-ui">
+                                <label><?php echo $this->form->ifsccode->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->ifsccode; ?></div>
+				<?php if(isset($this->msgarray['ifsccode'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->ifsccode->getId(); ?>"><?php echo $this->msgarray['ifsccode'];?></span>
+				<?php }?>
+				</div>
 				
 							
 				<div class="new-form-ui-submit" style="margin: 15px 0;">

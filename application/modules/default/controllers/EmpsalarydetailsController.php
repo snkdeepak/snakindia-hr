@@ -420,6 +420,7 @@ class Default_EmpsalarydetailsController extends Zend_Controller_Action
 				$accountclasstypeid = $this->_request->getParam('accountclasstypeid');
 				$bankaccountid = $this->_request->getParam('bankaccountid');
 				$accountnumber = trim($this->_request->getParam('accountnumber'));
+				$ifsccode = trim($this->_request->getParam('ifsccode'));
 	
 				$accountholding = $this->_request->getParam('accountholding');
 				$accountholding = sapp_Global::change_date($accountholding, 'database');
@@ -437,6 +438,7 @@ class Default_EmpsalarydetailsController extends Zend_Controller_Action
 	                                 'accountclasstypeid'=>($accountclasstypeid!=''?$accountclasstypeid:NULL),
 	                                 'bankaccountid'=>($bankaccountid!=''?$bankaccountid:NULL),    								 
 					      			 'accountnumber'=>($accountnumber!=''?$accountnumber:NULL),
+					      			 'ifsccode'=>($ifsccode!=''?$ifsccode:NULL),
 									 'accountholding'=>($accountholding!=''?$accountholding:NULL),
 									 'modifiedby'=>$loginUserId,
 				                     'modifieddate'=>gmdate("Y-m-d H:i:s")
