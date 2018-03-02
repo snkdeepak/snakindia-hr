@@ -1,0 +1,1 @@
+ALTER TABLE `main_empsalarydetails` ADD `ifsccode` VARCHAR(20) NULL AFTER `accountnumber`;
